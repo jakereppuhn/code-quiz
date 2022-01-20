@@ -38,7 +38,7 @@ List the ready features here:
 
 
 ## Screenshots
-![Example screenshot](/img/snippet.png)
+![Example screenshot](<img src="/img/snippet.PNG">)
 
 
 ## Setup
