@@ -1,21 +1,24 @@
-var startQuizBtn = document.getElementById('startbtn')
+var quizBody = document.getElementById('codequiz')
+var resultsEl = document.getElementById('results')
+var finalScoreEl = document.getElementById('finalScore')
+var startBtn = document.getElementById('startbtn')
 var checkScores = document.getElementById('highbtn')
-var quiz = document.getElementById('codequiz')
+var endGameBtns = document.getElementById('endGameBtns')
+var submitScoreBtn = document.getElementById('submitScore')
 var quizHome = document.getElementById('homepage')
-var highscore = document.getElementById('highscore')
-var highscoreContainer = document.getElementById('hs')
+var highscoreContainer = document.getElementById('highscore')
+var highscoreDiv = document.getElementById('hs')
 var highscoreNameInput = document.getElementById('user')
 var highscoreNameDisplay = document.getElementById('hs-user')
 var highscoreScoreDisplay = document.getElementById('hs-score')
-var questionBox = document.getElementById('questions')
+var questionContainer = document.getElementById('questions')
 var quizTimer = document.getElementById('timer')
 var gameoverDiv = document.getElementById('gameover')
-var finalScoreEl = document.getElementById('finalScore')
-var resultsEl = document.getElementById('results')
 var buttonA = document.getElementById('a')
 var buttonB = document.getElementById('b')
 var buttonC = document.getElementById('c')
 var buttonD = document.getElementById('d')
+
 
 var quizQuestions = [
     {
@@ -73,7 +76,7 @@ function generateQuizQuestion() {
       return showScore()
     }
     var currentQuestion = quizQuestions[currentQuestionIndex]
-    questionBox.innerHTML = '<p>' + currentQuestion.question + '</p>'
+    questionContainer.innerHTML = '<p>' + currentQuestion.question + '</p>'
     buttonA.innerHTML = currentQuestion.choiceA
     buttonB.innerHTML = currentQuestion.choiceB
     buttonC.innerHTML = currentQuestion.choiceC
@@ -94,11 +97,11 @@ function startQuiz() {
         showScore()
       }
     }, 1000)
-    quiz.style.display = 'block'
+    quizBody.style.display = 'block'
 }
 
 function showScore() {
-    quiz.style.display = 'none'
+    quizBody.style.display = 'none'
     gameoverDiv.style.display = 'flex'
     clearInterval(timerInterval)
     highscoreName.value = ''
@@ -106,14 +109,68 @@ function showScore() {
       'You got ' + score + ' out of ' + quizQuestions.length + ' correct!'
 }
 
-function replayQuiz () {
+submitScoreBtn.addEventListener('click', function highscore() {
+    if (highscoreNameInput.value === '') {
+        alert('Initials cannot be blank')
+        return false
+    } else {
+        var savedHighscores =
+        JSON.parse(localStorage.getItem('savedHighscores')) || []
+        var currentUser = highscoreNameInput.value.trim()
+        var currentHighscore = {
+            name: currentUser,
+            score: score,
+        }
+  
+      gameoverDiv.style.display = 'none'
+      highscoreContainer.style.display = 'flex'
+      highscoreDiv.style.display = 'block'
+      endGameBtns.style.display = 'flex'
+  
+      savedHighscores.push(currentHighscore)
+      localStorage.setItem('savedHighscores', JSON.stringify(savedHighscores))
+      generateHighscores()
+    }
+})
 
+function generateHighscores() {
+    highscoreNameDisplay.innerHTML = ''
+    highscoreScoreDisplay.innerHTML = ''
+    var highscores = JSON.parse(localStorage.getItem('savedHighscores')) || []
+    for (i = 0; i < highscores.length; i++) {
+        var newNameSpan = document.createElement('li')
+        var newScoreSpan = document.createElement('li')
+        newNameSpan.textContent = highscores[i].name
+        newScoreSpan.textContent = highscores[i].score
+        highscoreNameDisplay.appendChild(newNameSpan)
+        highscoreScoreDisplay.appendChild(newScoreSpan)
+    }
+}
+  
+
+function showHighscore() {
+    quizHome.style.display = 'none'
+    gameoverDiv.style.display = 'none'
+    highscoreContainer.style.display = 'flex'
+    highscore.style.display = 'block'
+    endGameBtns.style.display = 'flex'
+  
+    generateHighscores()
 }
 
 function clearScore () {
     window.localStorage.clear()
     highscoreNameDisplay.textContent = ''
     highscoreScoreDisplay.textContent= ''
+}
+
+function replayQuiz () {
+    highscoreContainer.style.display = 'none'
+    gameoverDiv.style.display = 'none'
+    quizHome.style.display = 'flex'
+    timeLeft = 90
+    score = 0
+    currentQuestionIndex = 0
 }
 
 function checkAnswer (answer) {
@@ -136,4 +193,4 @@ function checkAnswer (answer) {
 }
 
 
-startQuizBtn.addEventListener('click', startQuiz)
+startBtn.addEventListener('click', startQuiz)

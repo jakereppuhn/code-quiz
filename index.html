@@ -13,7 +13,7 @@
 
             <h1>Code Quiz</h1>
             <button id="startbtn">Start</button>
-            <button id="highbtn">High Scores</button>
+            <button id="highbtn" onclick="showHighScore()">High Scores</button>
 
         </div>
         <div id="codequiz">
@@ -30,13 +30,7 @@
         <div id="gameover">
 
             <div id="finalScore"></div>
-            <input
-              type="text"
-              size="40"
-              placeholder="Enter you name for high score"
-              name="user"
-              id="user"
-            />
+            <input type="text" size="40" placeholder="Enter your name" name="user" id="user"/>
             <button id="submitScore">Submit Score</button>
 
         </div>
@@ -48,8 +42,10 @@
                     <h2>Score</h2>
                 </div>
 
-                <div id="hs-user"></div>
-                <div id="hs-score"></div>
+                <div id="hs-board">
+                    <div id="hs-user"></div>
+                    <div id="hs-score"></div>
+                </div>
 
             </div>
 
