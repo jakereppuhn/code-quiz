@@ -1,0 +1,31 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+button {
+    background-color: #053c5e;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    color: white;
+}
