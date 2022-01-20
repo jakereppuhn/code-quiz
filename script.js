@@ -1,10 +1,12 @@
-var startQuiz = document.getElementById('startbtn')
+var startQuizBtn = document.getElementById('startbtn')
 var checkScores = document.getElementById('highbtn')
 var quiz = document.getElementById('codequiz')
 var quizHome = document.getElementById('homepage')
 var highscore = document.getElementById('highscore')
 var highscoreContainer = document.getElementById('hs')
-var highscoreName = document.getElementById('user')
+var highscoreNameInput = document.getElementById('user')
+var highscoreNameDisplay = document.getElementById('hs-user')
+var highscoreScoreDisplay = document.getElementById('hs-score')
 var questionBox = document.getElementById('questions')
 var quizTimer = document.getElementById('timer')
 var gameoverDiv = document.getElementById('gameover')
@@ -71,22 +73,21 @@ function generateQuizQuestion() {
       return showScore()
     }
     var currentQuestion = quizQuestions[currentQuestionIndex]
-    questionsBox.innerHTML = '<p>' + currentQuestion.question + '</p>'
+    questionBox.innerHTML = '<p>' + currentQuestion.question + '</p>'
     buttonA.innerHTML = currentQuestion.choiceA
     buttonB.innerHTML = currentQuestion.choiceB
     buttonC.innerHTML = currentQuestion.choiceC
     buttonD.innerHTML = currentQuestion.choiceD
-  }
+}
 
 function startQuiz() {
     gameoverDiv.style.display = 'none'
     quizHome.style.display = 'none'
     generateQuizQuestion()
-  
-    //Timer
+
     timerInterval = setInterval(function () {
       timeRemaining--
-      quizTimer.textContent = 'Time left: ' + timeRemaining
+      quizTimer.textContent = 'Time remaining: ' + timeRemaining
   
       if (timeRemaining === 0) {
         clearInterval(timerInterval)
@@ -94,4 +95,27 @@ function startQuiz() {
       }
     }, 1000)
     quiz.style.display = 'block'
-  }
+}
+
+function showScore() {
+    quiz.style.display = 'none'
+    gameoverDiv.style.display = 'flex'
+    clearInterval(timerInterval)
+    highscoreName.value = ''
+    finalScoreEl.innerHTML =
+      'You got ' + score + ' out of ' + quizQuestions.length + ' correct!'
+}
+
+function replayQuiz () {
+
+}
+
+function clearScore () {
+    window.localStorage.clear()
+    highscoreNameDisplay.textContent = ''
+    highscoreScoreDisplay.textContent= ''
+}
+
+
+
+startQuizBtn.addEventListener('click', startQuiz)
