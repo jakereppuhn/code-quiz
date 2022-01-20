@@ -13,18 +13,22 @@
 
             <h1>Code Quiz</h1>
             <button id="startbtn">Start</button>
-            <button id="highbtn" onclick="showHighScore()">High Scores</button>
+            <button id="highbtn" onclick="showScoreBoard()">High Scores</button>
 
         </div>
         <div id="codequiz">
 
-            <div id="timer">Time Remaining:</div>
+            
             <div id="questions">Exmaple</div>
+            <div id="answerBtns">
             <button id="a" onclick="checkAnswer('a')">A</button>
             <button id="b" onclick="checkAnswer('b')">B</button>
             <button id="c" onclick="checkAnswer('c')">C</button>
             <button id="d" onclick="checkAnswer('d')">D</button>
+            </div>
             <div id="results"></div>
+
+            <div id="timer">Time Remaining:</div>
 
         </div>
         <div id="gameover">

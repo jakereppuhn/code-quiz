@@ -1,6 +1,6 @@
 var quizBody = document.getElementById('codequiz')
 var resultsEl = document.getElementById('results')
-var finalScoreEl = document.getElementById('finalScore')
+var finalScore = document.getElementById('finalscore')
 var startBtn = document.getElementById('startbtn')
 var checkScores = document.getElementById('highbtn')
 var endGameBtns = document.getElementById('endGameBtns')
@@ -101,12 +101,11 @@ function startQuiz() {
 }
 
 function showScore() {
-    quizBody.style.display = 'none'
     gameoverDiv.style.display = 'flex'
+    quizBody.style.display = 'none'
     clearInterval(timerInterval)
-    highscoreName.value = ''
-    finalScoreEl.innerHTML =
-      'You got ' + score + ' out of ' + quizQuestions.length + ' correct!'
+    highscoreNameInput.value = ''
+    document.getElementById('finalscore').innerHTML = "Hello"
 }
 
 submitScoreBtn.addEventListener('click', function highscore() {
@@ -148,7 +147,7 @@ function generateHighscores() {
 }
   
 
-function showHighscore() {
+function showScoreBoard() {
     quizHome.style.display = 'none'
     gameoverDiv.style.display = 'none'
     highscoreContainer.style.display = 'flex'
