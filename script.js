@@ -116,6 +116,24 @@ function clearScore () {
     highscoreScoreDisplay.textContent= ''
 }
 
+function checkAnswer (answer) {
+    correct = quizQuestions[currentQuestionIndex].correctAnswer
+
+    if (answer === correct && currentQuestionIndex !== finalQuestionIndex) {
+        score++
+        alert('Correct!')
+        currentQuestionIndex++
+        generateQuizQuestion()
+    } else if (
+        answer !== correct && currentQuestionIndex !== finalQuestionIndex
+    ) {
+        alert('Incorrect!')
+        currentQuestionIndex++
+        generateQuizQuestion()
+    } else {
+        showScore()
+    }
+}
 
 
 startQuizBtn.addEventListener('click', startQuiz)
